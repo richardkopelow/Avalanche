@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour
     public Transform Camera;
     public Transform Background;
 
-    private bool wasPressed;
-    private float lastMousePos = 0;
-
     private Material backgroundMat;
 
     void Start()
@@ -31,17 +28,9 @@ public class GameManager : MonoBehaviour
         bool pressed = Input.GetMouseButton(0);
         if (pressed)
         {
-            if (!wasPressed)
-            {
-                lastMousePos = Input.mousePosition.y;
-            }
-            float delta = Input.mousePosition.y - lastMousePos;
-            delta *= GlobalValues.GameHeight / Screen.height;
-            GlobalValues.YOffset += delta;
+            GlobalValues.YOffset = Input.mousePosition.y * GlobalValues.GameHeight / Screen.height;
             backgroundMat.SetFloat("_YOffset", GlobalValues.YOffset);
             backgroundMat.SetFloat("_Slope", GlobalValues.Slope);
-            lastMousePos = Input.mousePosition.y;
         }
-        wasPressed = pressed;
     }
 }

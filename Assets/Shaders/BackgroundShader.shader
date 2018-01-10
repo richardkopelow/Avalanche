@@ -62,7 +62,7 @@
 				float dist = distanceFromCurve(i.worldPos);
 				if (dist<0.2)
 				{
-					col = _Color;
+					col = _Color*(1 - dist/0.2);
 				}
 				return col;
 			}
